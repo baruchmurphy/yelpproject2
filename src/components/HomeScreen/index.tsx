@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { Box, Button, Typography, makeStyles } from '@material-ui/core';
 import YelpCards from '../Cards/YelpCards';
 import { useAuth } from '../../contexts/AuthContext';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles ({
    sortOptions: {
@@ -27,18 +28,21 @@ interface HomeContentProps {
 
 const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
     const classes = useStyles();
-    const { getData, businesses, profile } = useAuth();
+    const history = useHistory();
+    const { getData, businesses } = useAuth();
     const [sortBy, setSortBy] = useState(Object.keys(sortByOptions)[0]);
 
 
     useEffect(() => {
-        if (!businesses) {
-            getData('sushi', 'cupertino', sortBy)
-            toggleLoadingFalse();
-        } 
+        try {
+            if (!businesses) {
+                getData('sushi', 'cupertino', sortBy)
+                toggleLoadingFalse();
+            }
+        } catch (error) {
+            history.push('/error1')
+        }
     },[businesses, sortBy, getData, toggleLoadingFalse])
-
-    console.log('Home ===', profile)
 
     const validationSchema = Yup.object().shape({
         term: Yup.string().required('food type is required'),
@@ -70,8 +74,8 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
 
     const handleSortByClick = (option: string) => {
         setSortBy(option)
-        console.log('======> ', option)
     };
+
 
     const renderSortByOptions = () => {
         return Object.keys(sortByOptions).map((sortByOption, idx) => {
@@ -85,59 +89,59 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
     }
 
     return (
-            <>
-                <Box className='imageContainer'>
-                    <Box width='100%' className={classes.sortOptions}>
-                        <Box className='SearchBar-sort-options'>
-                            <ul>
-                                {renderSortByOptions()}
-                            </ul>
-                        </Box>
-                    </Box>
-                    <Box className='imageContents'>
-                        <Formik 
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        validateOnBlur={false} 
-                        validateOnChange={false} 
-                        onSubmit={handleSubmit}
-                        >
-                            <Form>
-                                <Box mb='1rem' display="flex" flexDirection='collumn' justifyContent='center'>
-                                    <Box width="20rem" mx='1rem'>
-                                        <FormikInput
-                                            fullWidth
-                                            size="small"
-                                            name='term'
-                                            type='string'
-                                            placeholder='input food type'
-                                            variant='outlined'
-                                            className='inputs'
-                                        />
-                                    </Box>
-                                    <Box width="20rem">
-                                        <FormikInput
-                                            fullWidth
-                                            size='small'
-                                            name='location'
-                                            type='string'
-                                            placeholder='input location here'
-                                            variant='outlined'
-                                            className='inputs'
-                                        />
-                                    </Box>
-                                </Box>
-                                <Box width='100%' className={classes.sortOptions}>
-                                    <Button color="primary" variant="contained" type='submit' className='button'>
-                                        <Typography className='button'>Lets Go</Typography>
-                                    </Button>
-                                </Box>
-                            </Form>
-                        </Formik>
+        <>
+            <Box className='imageContainer'>
+                <Box width='100%' className={classes.sortOptions}>
+                    <Box className='SearchBar-sort-options'>
+                        <ul>
+                            {renderSortByOptions()}
+                        </ul>
                     </Box>
                 </Box>
-                <YelpCards loading={loading} />
-            </>
+                <Box className='imageContents'>
+                    <Formik 
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    validateOnBlur={false} 
+                    validateOnChange={false} 
+                    onSubmit={handleSubmit}
+                    >
+                        <Form>
+                            <Box mb='1rem' display="flex" flexDirection='collumn' justifyContent='center'>
+                                <Box width="20rem" mx='1rem'>
+                                    <FormikInput
+                                        fullWidth
+                                        size="small"
+                                        name='term'
+                                        type='string'
+                                        placeholder='input food type'
+                                        variant='outlined'
+                                        className='inputs'
+                                    />
+                                </Box>
+                                <Box width="20rem">
+                                    <FormikInput
+                                        fullWidth
+                                        size='small'
+                                        name='location'
+                                        type='string'
+                                        placeholder='input location here'
+                                        variant='outlined'
+                                        className='inputs'
+                                    />
+                                </Box>
+                            </Box>
+                            <Box width='100%' className={classes.sortOptions}>
+                                <Button color="primary" variant="contained" type='submit' className='button'>
+                                    <Typography className='button'>Lets Go</Typography>
+                                </Button>
+                            </Box>
+                        </Form>
+                    </Formik>
+                </Box>
+            </Box>
+            <YelpCards loading={loading} />
+        </>
     )
 }
 

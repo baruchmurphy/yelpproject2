@@ -12,20 +12,26 @@ import {
         makeStyles, 
         Drawer, 
         List,
-        createStyles
+        createStyles,
+        Menu,
+        MenuItem,
+        Avatar
     } from '@material-ui/core';
 import Skeleton from 'react-loading-skeleton';
 import { useHistory, Link } from "react-router-dom";
 import HomeContent from '../components/HomeScreen';
 import { useAuth } from '../contexts/AuthContext'
-import NotFound from '../components/notfound';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon  from '@material-ui/icons/ChevronLeft';
+import Settings from '../components/settings';
+import NoData from '../components/Errors/NoData';
+
 
 const useStyles = makeStyles ((theme: any) => 
     createStyles({
     menuButton: {
-        marginLeft: '.5rem',
+        marginLeft: '.2rem',
+        marginTop: '-.4rem',
         justifyContent: 'flex-start',
     },
     appBarBox: {
@@ -39,6 +45,13 @@ const useStyles = makeStyles ((theme: any) =>
     drawer: {
         flexShrink: 0,
     },
+    drawerPaper: {
+        backgroundColor: 'rgb(226, 226, 226)',
+    },
+    drawerItems: {
+        textDecoration: 'none',
+        color:'black'
+    },
     drawerHeader: {
         width: 250,
         display: 'flex',
@@ -49,17 +62,30 @@ const useStyles = makeStyles ((theme: any) =>
     },
     titleText: {
         color: 'white',
+    },
+    avatarButton: {
+        marginTop: '-.5rem',
+        marginRight: '-.3rem'
+    },
+    link: {
+        color: 'black',
+        textDecoration: 'none' 
+    },
+    divider: {
+        marginBottom: '-7px'
     }
 })
 )
 
 const Home = () => {
     const classes = useStyles();
-    const { profile } = useAuth();
+    const { profile, logout } = useAuth();
     const history = useHistory();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const [content, setContent] = useState<any>(null);
+    const [anchorEl, setAnchorEl] = useState<any>(null);
+    const [error, setError] = useState("");
 
     const toggleLoadingFalse = () => {
         setLoading(false)
@@ -76,8 +102,16 @@ const Home = () => {
                     setContent(<Favorites/>)
                     setLoading(false)
                     break;
+                case '/settings':
+                    setContent(<Settings/>)
+                    setLoading(false)
+                    break;
+                case '/error1':
+                    setContent(<NoData/>)
+                    setLoading(false)
+                    break;
                 default: 
-                    setContent(<NotFound/>)
+                    setContent(<NoData/>)
                     setLoading(false)
             }
         }
@@ -109,9 +143,9 @@ const Home = () => {
         return drawerItems.map(item => {
             return (
                 <div onClick={() => setDrawerOpen(false)} key={item.name}>
-                    <Link to={item.to} style={{ textUnderlinePosition:'from-font', color:'black' }}>
+                    <Link to={item.to} className={classes.drawerItems}>
                         <ListItem button>
-                            <ListItemText color='black' primary={item.name} />
+                            <ListItemText primary={item.name} />
                         </ListItem>
                         <Divider />
                     </Link>
@@ -119,6 +153,26 @@ const Home = () => {
             );
         });
     };
+
+    const handleLogout = async () => {
+        handleClose()
+        try {
+            await logout()
+            history.push('/login')
+        } catch {
+            setError('failed to logout')
+            console.log(error)
+        }
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleClick = (event: any) => {
+        setAnchorEl(event.currentTarget)
+    };
+
 
     return(
         loading ?
@@ -144,21 +198,42 @@ const Home = () => {
                         <Typography className={classes.titleText} variant='h4'>ravenous</Typography>
                     </Box>
                         <Drawer
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
                             className={classes.drawer}
                             variant="persistent"
                             anchor="left"
                             open={drawerOpen}
                         >
                             <Box className={classes.drawerHeader}>
-                                <IconButton onClick={() => setDrawerOpen(false)} >
+                                <IconButton onClick={() => setDrawerOpen(!drawerOpen)} >
                                     <ChevronLeftIcon />
                                 </IconButton>
                             </Box>
-                            <Divider />
+                            <Divider className={classes.divider} />
                             <List>
                                 {renderDrawerList()}
                             </List>
                         </Drawer>
+                        <IconButton className={classes.avatarButton} onClick={handleClick}>
+                            <Avatar color='secondary'/>
+                        </IconButton>
+                        <Menu
+                            id="profilemenu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                            className='menu'
+                        >
+                        <MenuItem onClick={() => {
+                            handleClose()
+                        }}>
+                        <Link className={classes.link} to='/settings'>Settings</Link>
+                        </MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </Menu>
                 </Box>
             </AppBar>
             <Box>

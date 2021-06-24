@@ -6,8 +6,7 @@ import Login from './views/auth/login';
 import Register from './views/auth/register';
 import Forgot from './views/auth/forgot';
 
-
-function Routes() {
+const Routes = () => {
   return (
     <Switch>
       <Route exact path='/' component={Login} />
@@ -16,6 +15,8 @@ function Routes() {
       <Route exact path='/forgot' component={Forgot} />
       <PrivateRoute exact path='/home' component={Home}/>
       <PrivateRoute exact path='/favorites' component={Home} />
+      <PrivateRoute exact path='/settings' component={Home} />
+      <PrivateRoute exact path ='/error1' component={Home} />
     </Switch>
   );
 }

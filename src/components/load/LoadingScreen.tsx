@@ -21,7 +21,7 @@ const LoadingScreen = () => {
                 <Box paddingBottom="5rem">
                     <img alt='loading screen' src={Image} />
                 </Box>
-                <Box>
+                <Box width='100%' display='flex' justifyContent='center'>
                     <CircularProgress />
                 </Box>
             </Box>

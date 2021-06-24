@@ -1,12 +1,16 @@
 import React from "react";
 import * as Yup from 'yup'; 
-import { Button, Box, Typography, makeStyles, AppBar, Card } from "@material-ui/core";
+import { Button, Box, Typography, makeStyles, AppBar, Card, Link } from "@material-ui/core";
 import FormikInput from '../../../formik/FormikInput';
 import { Formik, Form } from "formik";
 
 const useStyles = makeStyles({
     inputs: {
-        marginBottom: 3
+        width: '20rem'
+    },
+    card: {
+        height: '17rem',
+        width: '25rem'
     }
 });
 
@@ -46,19 +50,9 @@ const Forgot = () => {
 
     return( 
         <>
-            <AppBar color='secondary' position="static">
-            <Box display="flex" justifyContent="flex-end">
-                    <Box display="flex" flexDirection="row" justifyContent="space-between" width="29rem" >
-                        <Typography variant="h4">Ravenous</Typography>
-                        <Box display="flex" flexDirection="row">
-                            <Box paddingRight="2rem">
-                                <Button variant='contained' color='secondary' href="/register">Sign Up</Button>
-                            </Box>
-                            <Box>
-                                <Button variant='contained' href="/login">Sign In</Button>
-                            </Box>
-                        </Box>
-                    </Box>
+            <AppBar color='primary' position="static">
+                <Box display="flex" justifyContent="center" width="100%" >
+                    <Typography color='secondary' variant="h4">Ravenous</Typography>
                 </Box>
             </AppBar>
             <Box height="40rem" display="flex" justifyContent="center" alignItems="center">
@@ -70,21 +64,39 @@ const Forgot = () => {
                         onSubmit={() => console.log('hello')}
                         validationSchema={validationSchema}
                     >
-                        <Card>
-                            <Typography variant="h4" gutterBottom>Recover Password</Typography>
-                            <Form>
-                                <FormikInput
-                                    name="email"
-                                    type="email"
-                                    placeholder="Type email here..." 
-                                    fullWidth
-                                    variant="outlined"
-                                    className={classes.inputs}
-                                />
-                                <Box my={3}>
-                                    <Button type="submit" variant='contained' color="primary">Submit</Button>
+                        <Card className={classes.card}>
+                            <Box display='flex' justifyContent='center' marginTop='1rem'>
+                                <Typography variant="h4" gutterBottom>Recover Password</Typography>
+                            </Box>
+                            <Box width='100%' display='flex' justifyContent='center'>
+                                <Box width='20rem' display='flex' justifyContent='center'>
+                                    <Form>
+                                        <FormikInput
+                                            name="email"
+                                            type="email"
+                                            placeholder="Type email here..." 
+                                            variant="outlined"
+                                            className={classes.inputs}
+                                        />
+                                        <Box display='flex' justifyContent='center' marginTop='1rem'>
+                                            <Box marginBottom='1rem'>
+                                                <Box>
+                                                    <Link href="/login">Know your password? Log In</Link>
+                                                </Box>
+                                                <Box>
+                                                    <Link href='/register'>Need an account? Sign Up</Link>
+                                                </Box>
+                                            </Box>
+                                        </Box>
+                                    </Form>
+
                                 </Box>
-                            </Form>
+                            </Box>
+                            <Box width='100%' display='flex' justifyContent='center' marginTop='1rem'>
+                                <Button type="submit" variant='contained' color="primary">
+                                    <Typography color='secondary'>Submit</Typography>
+                                </Button>
+                            </Box>
                         </Card>
                     </Formik>
                 </Box>

@@ -9,8 +9,19 @@ import FormikInput from '../../../formik/FormikInput';
 
 const useStyles = makeStyles({
     inputs: {
-        marginBottom: 3
+        marginBottom: '1rem',
+        width: '20rem'
     },
+    appbar: {
+        height: '3rem',
+    },
+    submit: {
+        color: 'white'
+    },
+    card: {
+        width: '25rem',
+        height: '21rem',
+    }
 });
 
 const Login = () => {
@@ -49,11 +60,10 @@ const Login = () => {
 
     return( 
         <>
-        <AppBar color='primary' position="static">
-            <Box display="flex" justifyContent="flex-end">
-                <Box display="flex" flexDirection="row" justifyContent="space-between" width="30rem" >
+        <AppBar color='primary' position="static" className={classes.appbar}>
+            <Box display="flex" marginTop='4px'>
+                <Box display="flex" justifyContent="center" width="100%" >
                     <Typography color='secondary' variant="h4">Ravenous</Typography>
-                    <Button variant='contained' color='secondary' href="/register">Sign Up</Button>
                 </Box>
             </Box>
         </AppBar>
@@ -66,32 +76,47 @@ const Login = () => {
                         onSubmit={handleSubmit}
                         validationSchema={validationSchema}
                     >
-                        <Card color='black'>
-                            <Typography variant="h4" gutterBottom>Login</Typography>
-                            <Form>
-                                <FormikAlert name="loginSucess" severity="success" />
-                                <FormikAlert name="loginError" severity="error" />
-                                <FormikInput
-                                    name="email"
-                                    type="email"
-                                    placeholder="Type email here..." 
-                                    fullWidth
-                                    variant="outlined"
-                                    className={classes.inputs}
-                                />
-                                <FormikInput 
-                                    name="password"
-                                    type="password"
-                                    placeholder="Type password here..." 
-                                    fullWidth
-                                    variant='outlined'
-                                    className={classes.inputs}
-                                />
-                                <Link href="/forgot">Forgot Password?</Link>
-                                <Box my={3} display='flex' justifyContent='center'>
-                                    <Button type="submit" variant='contained' color="primary">Submit</Button>
+                        <Card color='black' className={classes.card}>
+                            <Box marginTop='1rem' width='100%' display='flex' justifyContent='center'>
+                                <Typography variant="h4" gutterBottom>Login</Typography>
+                            </Box>
+                            <Box display='flex' justifyContent='center'>
+                                <Box width='20rem' height='10rem'>
+                                    <Form>
+                                        <FormikAlert name="loginSucess" severity="success" />
+                                        <FormikAlert name="loginError" severity="error" />
+                                        <FormikInput
+                                            name="email"
+                                            type="email"
+                                            placeholder="Type email here..." 
+                                            variant="outlined"
+                                            className={classes.inputs}
+                                        />
+                                        <FormikInput 
+                                            name="password"
+                                            type="password"
+                                            placeholder="Type password here..." 
+                                            variant='outlined'
+                                            className={classes.inputs}
+                                        />
+                                        <Box display='flex' justifyContent='center'>
+                                            <Box marginBottom='1rem'>
+                                                <Box marginBottom='2px'>
+                                                    <Link href="/forgot">Forgot Password?</Link>
+                                                </Box>
+                                                <Box>
+                                                    <Link href='/register'>Need an account? Sign Up</Link>
+                                                </Box>
+                                            </Box>
+                                        </Box>
+                                        <Box display='flex' justifyContent='center'>
+                                            <Button type="submit" variant='contained' color="primary">
+                                                <Typography className={classes.submit}>Submit</Typography>
+                                            </Button>
+                                        </Box>      
+                                    </Form>
                                 </Box>
-                            </Form>
+                            </Box>
                         </Card>
                     </Formik>
                 </Box>

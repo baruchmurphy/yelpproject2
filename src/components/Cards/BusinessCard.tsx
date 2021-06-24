@@ -1,19 +1,21 @@
-import react from 'react'
-import { Card, CardContent, makeStyles, Box, Typography } from '@material-ui/core'
+import react, { useState } from 'react'
+import { Card, makeStyles, Box, Typography } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import { useAuth } from '../../contexts/AuthContext'
 import { StarBorderOutlined, StarRateTwoTone } from '@material-ui/icons';
 import { Favorite } from '../Favorites';
 
-
 const useStyles = makeStyles ({
     card: {
-        height: '26rem',
+        height: '25.5rem',
         width: '17rem',
     },
     image: {
         height: '16rem',
         maxWidth: '15rem',
+    },
+    imageContainer: {
+        backgroundColor: 'black',
     },
     state: {
         paddingRight: '7px'
@@ -43,15 +45,19 @@ interface BusinessCardProps {
 const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
     const classes = useStyles();
     const { updateFavorites, deleteFavorite } = useAuth();
+    const [isFavorite, setIsfavorite] = useState<boolean>(favorites.map(favorite => favorite.name).includes(business.name));
 
-    const isFavorite = favorites.map(favorite => favorite.name).includes(business.name);
+    const toggleIsFavorite = () => {
+        setIsfavorite(!isFavorite)
+    }
 
     return(
-        <Box marginRight='2rem' marginTop='2rem' display='inline-flex' className={classes.card}>
-            <Card className={classes.cardContent}>
-                    <Box width='16rem' display='flex' justifyContent='center' mb='1rem'>
-                        <img alt='this is food' className={classes.image} src={business.image_url} />
-                    </Box>
+        <Box marginLeft='2rem' marginBottom='2rem' display='inline-flex' className={classes.card}>
+            <Card>
+                <Box className={classes.imageContainer} width='17rem' display='flex' justifyContent='center' mb='5px'>
+                    <img alt='this is food' className={classes.image} src={business.image_url} />
+                </Box>
+                <Box className={classes.cardContent}>
                     <Box>
                         <Typography className={classes.restaurant} align='left'>{business.name}</Typography>
                     </Box>
@@ -72,41 +78,43 @@ const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
                     <Box display='flex' justifyContent='center'>
                         {isFavorite ? 
                             <IconButton 
-                                onClick={() => deleteFavorite(
-                                    {
-                                        img:business.image_url, 
-                                        name:business.name, 
-                                        city:business.location.city, 
-                                        state:business.location.state, 
-                                        zip:business.location.zip_code, 
-                                        type:business.categories[0].title, 
-                                        rating:business.rating, 
-                                        reviewCount: business.review_count
-                                    }
-                                    )} 
+                                onClick={() => {
+                                    deleteFavorite(business.name)
+                                    setIsfavorite(false);
+                                }
+                            } 
                             >
                                 <StarRateTwoTone color='primary' />
                             </IconButton> 
                             : 
                             <IconButton
-                                onClick={() => 
+                                onClick={() => {
                                     updateFavorites(
                                         {
-                                            img:business.image_url, 
+                                            image_url:business.image_url, 
                                             name:business.name, 
-                                            city:business.location.city, 
-                                            state:business.location.state, 
-                                            zip:business.location.zip_code, 
-                                            type:business.categories[0].title, 
+                                            location: {
+                                                zip_code:business.location.zip_code, 
+                                                state:business.location.state, 
+                                                city:business.location.city
+                                            }, 
+                                            categories: [{
+                                                title:business.categories[0].title, 
+                                            }],
                                             rating:business.rating, 
-                                            reviewCount: business.review_count
+                                            review_count: business.review_count
                                         }
-                                    )} 
+                                        
+                                    )
+                                    setIsfavorite(true);
+                                }
+                                } 
                             >
                                 <StarBorderOutlined color='primary' />
                             </IconButton>
                         }
                     </Box>
+                </Box>
             </Card>
         </Box>
     )
