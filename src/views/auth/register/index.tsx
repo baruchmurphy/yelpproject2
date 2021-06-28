@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 const Register = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const { signup, user } = useAuth();
+    const { signup } = useAuth();
     const classes = useStyles();
     const history = useHistory();
 
@@ -61,20 +61,19 @@ const Register = () => {
                 actions.setStatus({ loginSuccess: 'Setting up...'})
                 setLoading(false)
                 history.push('/home')
-                console.log('done');
             } catch (error) {
                 setError('failed to create an account')
                 actions.setStatus({ loginError: 'Something went wrong' })
                 setLoading(false)
             }
-        }, [history, loading, signup]
+        }, [history, signup]
     );
 
     return( 
         <>
             <AppBar color='primary' position="static">
                 <Box display="flex" flexDirection="row" justifyContent="center">
-                    <Typography color='secondary' variant="h4">Ravenous</Typography>
+                    <Typography color='secondary' variant="h4">ravenous</Typography>
                 </Box>
             </AppBar>
                 <Box height="40rem" display="flex" justifyContent="center" alignItems="center">
@@ -127,7 +126,7 @@ const Register = () => {
                                             className={classes.inputs}
                                         />
                                         <Box display='flex' justifyContent='center'>
-                                            <Link href="/login" >Already have an account? Login</Link>
+                                            <Link color='textPrimary' href="/login" >Already have an account? Login</Link>
                                         </Box>
                                         <Box display="flex" justifyContent="center" my={3}>
                                             <Button disabled={loading} type="submit" variant="contained" color="primary">

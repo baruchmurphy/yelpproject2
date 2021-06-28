@@ -42,7 +42,7 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
         } catch (error) {
             history.push('/error1')
         }
-    },[businesses, sortBy, getData, toggleLoadingFalse])
+    },[businesses, sortBy, getData, history, toggleLoadingFalse])
 
     const validationSchema = Yup.object().shape({
         term: Yup.string().required('food type is required'),
@@ -58,7 +58,6 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
     const handleSubmit = useCallback(
         async function(values) {
             if(values.term && values.location) {
-                console.log('working')
                 return getData(values.term, values.location, sortBy)
             }
         },[getData, sortBy]

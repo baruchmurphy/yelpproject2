@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { auth } from '../services/firebase';
 import { firestore } from '../services/firebase';
 import { useHistory } from "react-router-dom";
+import { NewUser, Favorite, Business } from '../components/types';
 
 const AuthContext = React.createContext<any>('');
 
@@ -17,10 +18,10 @@ export function AuthProvider({ children }: any) {
     const [authLoading, setAuthLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState<any>();
     const [profile, setProfile] = useState<any>();
-    const [businesses, setBusinesses] = useState<any>();
-    const [favorites, setFavorites] = useState<any>();
+    const [businesses, setBusinesses] = useState<Business[]>();
+    const [favorites, setFavorites] = useState<Favorite[] | null>();
 
-    const createProfile = async(user: any) => {
+    const createProfile = async(user: NewUser) => {
         try {
             const newUser = {
                 uid: user.uid,
@@ -54,7 +55,7 @@ export function AuthProvider({ children }: any) {
         }
     };
 
-    const getData = async(term: any, location: any, sortBy: any) => {
+    const getData = async(term: string, location: string, sortBy: string) => {
         try {
             await axios.get(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`, {
                 headers: {
@@ -62,10 +63,9 @@ export function AuthProvider({ children }: any) {
                 }
             }).then((response: any) => {
                 setBusinesses(response)
-
             })
             } catch (error) {
-                console.log(error)
+                history.push('/error1')
             }
     } 
 
@@ -160,7 +160,7 @@ export function AuthProvider({ children }: any) {
             }
         });
         return unsubscribe
-    }, [authLoading, profile, currentUser, businesses, favorites]);
+    }, [authLoading, profile, currentUser, businesses, favorites, history]);
 
     
     const value = {

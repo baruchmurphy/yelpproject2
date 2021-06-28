@@ -52,7 +52,7 @@ const Forgot = () => {
         <>
             <AppBar color='primary' position="static">
                 <Box display="flex" justifyContent="center" width="100%" >
-                    <Typography color='secondary' variant="h4">Ravenous</Typography>
+                    <Typography color='secondary' variant="h4">ravenous</Typography>
                 </Box>
             </AppBar>
             <Box height="40rem" display="flex" justifyContent="center" alignItems="center">
@@ -81,10 +81,10 @@ const Forgot = () => {
                                         <Box display='flex' justifyContent='center' marginTop='1rem'>
                                             <Box marginBottom='1rem'>
                                                 <Box>
-                                                    <Link href="/login">Know your password? Log In</Link>
+                                                    <Link color='textPrimary' href="/login">Know your password? Log In</Link>
                                                 </Box>
                                                 <Box>
-                                                    <Link href='/register'>Need an account? Sign Up</Link>
+                                                    <Link color='textPrimary' href='/register'>Need an account? Sign Up</Link>
                                                 </Box>
                                             </Box>
                                         </Box>

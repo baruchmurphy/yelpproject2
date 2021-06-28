@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     },
     card: {
         padding: '5px',
-        width: '27rem'
+        width: '27rem',
     },
     editIcon: {
         marginLeft: '1rem',
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     },
     divider: {
         marginBottom: '1rem'
-    }
+    },
 });
 
 
@@ -53,7 +53,6 @@ const initialValues = {
             try {
                 await updateEmailAndPassword(values.email, values.password)
             } catch (error) {
-                console.log(error.message)
                 const message = `The user's credential is no longer valid. The user must sign in again.`
                 if(error.message === message) {
                     updateFirestoreEmailAndPassword(values.email, values.password)
@@ -64,12 +63,12 @@ const initialValues = {
             } finally {
                 setEditing(false)
             }
-        }, []
+        }, [updateEmailAndPassword, updateFirestoreEmailAndPassword]
     )
 
     return (
         <Box width='100%' height='20rem' marginTop='4rem' display='flex' justifyContent='center' alignItems='center' >
-            <Card className={classes.card}>
+            <Card elevation={5} className={classes.card}>
                 <Box width='100%' display='flex' justifyContent='center'>
                     <Typography variant='h4'>Account Details</Typography>
                     <IconButton onClick={()=> setEditing(!editing)}>
@@ -100,7 +99,7 @@ const initialValues = {
                                             />
                                         </Box>
                                         <Box>
-                                            <Typography>Passoword:</Typography>
+                                            <Typography>Password:</Typography>
                                             <FormikInput
                                                 name="password"
                                                 type="password"

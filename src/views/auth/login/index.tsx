@@ -63,7 +63,7 @@ const Login = () => {
         <AppBar color='primary' position="static" className={classes.appbar}>
             <Box display="flex" marginTop='4px'>
                 <Box display="flex" justifyContent="center" width="100%" >
-                    <Typography color='secondary' variant="h4">Ravenous</Typography>
+                    <Typography color='secondary' variant="h4">ravenous</Typography>
                 </Box>
             </Box>
         </AppBar>
@@ -102,10 +102,10 @@ const Login = () => {
                                         <Box display='flex' justifyContent='center'>
                                             <Box marginBottom='1rem'>
                                                 <Box marginBottom='2px'>
-                                                    <Link href="/forgot">Forgot Password?</Link>
+                                                    <Link color='textPrimary' href="/forgot">Forgot Password?</Link>
                                                 </Box>
                                                 <Box>
-                                                    <Link href='/register'>Need an account? Sign Up</Link>
+                                                    <Link color='textPrimary' href='/register'>Need an account? Sign Up</Link>
                                                 </Box>
                                             </Box>
                                         </Box>
