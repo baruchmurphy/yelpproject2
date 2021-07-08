@@ -124,7 +124,7 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
                                         size='small'
                                         name='location'
                                         type='string'
-                                        placeholder='input location here'
+                                        placeholder='input location'
                                         variant='outlined'
                                         className='inputs'
                                     />

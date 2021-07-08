@@ -64,7 +64,7 @@ const Forgot = () => {
                         onSubmit={() => console.log('hello')}
                         validationSchema={validationSchema}
                     >
-                        <Card className={classes.card}>
+                        <Card elevation={5} className={classes.card}>
                             <Box display='flex' justifyContent='center' marginTop='1rem'>
                                 <Typography variant="h4" gutterBottom>Recover Password</Typography>
                             </Box>

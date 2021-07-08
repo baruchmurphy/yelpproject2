@@ -70,7 +70,7 @@ const Register = () => {
     );
 
     return( 
-        <>
+        <Box>
             <AppBar color='primary' position="static">
                 <Box display="flex" flexDirection="row" justifyContent="center">
                     <Typography color='secondary' variant="h4">ravenous</Typography>
@@ -78,7 +78,6 @@ const Register = () => {
             </AppBar>
                 <Box height="40rem" display="flex" justifyContent="center" alignItems="center">
                     <Box maxWidth={300}>
-                    {error && <Alert severity="error">{error}</Alert>}
                         <Formik 
                             validateOnBlur={false} 
                             validateOnChange={false} 
@@ -86,13 +85,14 @@ const Register = () => {
                             onSubmit={handleSubmit}
                             validationSchema={validationSchema}
                         >
-                        <Card className={classes.card}>
+                        <Card elevation={5} className={classes.card}>
                             <Box width='100%' display='flex' justifyContent='center' marginTop='1rem'>
                                 <Typography variant="h4" gutterBottom>Sign Up</Typography>
                             </Box>
                             <Box display='flex' justifyContent='center'>
                                 <Box width='20rem'>
                                     <Form id="sign-up-form">
+                                        {error && <Alert severity="error">{error}</Alert>}
                                         <FormikAlert name="loginSuccess" severity="success"  />
                                         <FormikAlert name="loginError" severity="error"  />
                                         <FormikInput 
@@ -136,12 +136,11 @@ const Register = () => {
                                     </Form>
                                 </Box>
                             </Box>
-  
                         </Card>
                     </Formik>
                 </Box>
             </Box>
-        </>
+        </Box>
     );
 };
 

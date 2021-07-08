@@ -31,6 +31,7 @@ export type Business = {
 export type NewUser = {
     uid: string,
     email: string,
+    providerData: string[]
     password: string, 
     favorites?: Favorite | [],
 }

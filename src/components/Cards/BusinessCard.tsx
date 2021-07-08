@@ -104,7 +104,6 @@ const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
                                             rating:business.rating, 
                                             review_count: business.review_count
                                         }
-                                        
                                     )
                                     setIsfavorite(true);
                                 }
@@ -114,7 +113,7 @@ const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
                             </IconButton>
                         }
                     </Box>
-                    </Box>
+                </Box>
                     
                     <Divider className={classes.divider} />
                     <Box width='16.8rem' display='inline-flex'>

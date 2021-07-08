@@ -23,6 +23,10 @@ export function AuthProvider({ children }: any) {
 
     const createProfile = async(user: NewUser) => {
         try {
+            const providerData: string[] = []
+            user.providerData.forEach((data: any) => {
+                providerData.push(data.providerId)
+            });
             const newUser = {
                 uid: user.uid,
                 email: user.email,
@@ -112,16 +116,24 @@ export function AuthProvider({ children }: any) {
         rating:number, 
         review_count:number
     }) => {   
-        const newFavorites = {favorites: [...profile.favorites, restaurant]}
-        firestore.collection('Users').doc(currentUser.uid).update(newFavorites)
-        setFavorites(newFavorites.favorites);
-    }
+        if(favorites) {
+            const newFavorites = {favorites: [...favorites, restaurant]}
+            firestore.collection('Users').doc(currentUser.uid).update(newFavorites);
+            setFavorites(newFavorites.favorites);
+        } else {
+            const newFavorites = {favorites: [restaurant]};
+            firestore.collection('Users').doc(currentUser.uid).update(newFavorites);
+            setFavorites(newFavorites.favorites);
+        }
+    };
 
     const deleteFavorite = (favorite: string) => {
-        const newFavorites = profile.favorites.filter((item: any) => item.name !== favorite);
-        firestore.collection('Users').doc(currentUser.uid).update({favorites: newFavorites});
-        setFavorites(newFavorites.favorites);
-    }
+        if(favorites) {
+            const newFavorites = favorites.filter((item: any) => item.name !== favorite);
+            firestore.collection('Users').doc(currentUser.uid).update({favorites: newFavorites});
+            setFavorites(newFavorites);
+        }
+    };
 
     const logout = () => {
        return auth.signOut()
@@ -132,14 +144,22 @@ export function AuthProvider({ children }: any) {
             email: email,
             password: password
         })
-    }
+    };
 
     const updateEmailAndPassword = (email: string, password: string) => {
-        return(
-            currentUser.updateEmail(email),
-            currentUser.updatePassword(password)
-        )
+        currentUser.updateEmail(email);
+        currentUser.updatePassword(password);
+        reAuthenticateUser(profile.providerData.providerId, email);
+        return;
     };
+
+    const reAuthenticateUser = (providerID: string, loginMethod: string) => {
+        try {
+            currentUser.reauthenticateWithCredential({providerID, loginMethod})
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() =>{
         console.log('authuse')
