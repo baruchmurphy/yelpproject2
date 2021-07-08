@@ -10,11 +10,18 @@ import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     inputs: {
-        marginBottom: 3
+        marginBottom: '1rem',
+        width: '20rem'
     },
     container: {
         height: '50rem',
 
+    },
+    card: {
+        width: '25rem'
+    },
+    button: {
+        color: 'white'
     }
 });
 
@@ -48,88 +55,92 @@ const Register = () => {
                 values.confirmPassword) {
                     return setError('Passwords do not match')
                 }
-                    await signup(values.email, values.password)
-                try {
-                    setLoading(true)
-                    actions.setStatus({ loginSuccess: 'Setting up...'})
-                    setLoading(false)
-                    history.push('/home')
-                    console.log('done');
-                } catch (error) {
-                    setError('failed to create an account')
-                    actions.setStatus({ loginError: 'Something went wrong' })
-                    setLoading(false)
-                }
-            console.log(loading)
-        }, [history, loading, signup]
+            try {
+                await signup(values.email, values.password)
+                setLoading(true)
+                actions.setStatus({ loginSuccess: 'Setting up...'})
+                setLoading(false)
+                history.push('/home')
+            } catch (error) {
+                setError('failed to create an account')
+                actions.setStatus({ loginError: 'Something went wrong' })
+                setLoading(false)
+            }
+        }, [history, signup]
     );
 
     return( 
-            <>
-                <AppBar color='primary' position="static">
-                    <Box display="flex" flexDirection="row" justifyContent="center">
-                        <Typography color='secondary' variant="h4">Ravenous</Typography>
-                    </Box>
-                </AppBar>
-                    <Box height="40rem" display="flex" justifyContent="center" alignItems="center">
-                        <Box maxWidth={300}>
-                        {error && <Alert severity="error">{error}</Alert>}
-                            <Formik 
-                                validateOnBlur={false} 
-                                validateOnChange={false} 
-                                initialValues={initialValues}
-                                onSubmit={handleSubmit}
-                                validationSchema={validationSchema}
-                            >
-                            <Card>
-                                <Typography variant="h4" gutterBottom>Sign Up</Typography>
-                                <Form id="sign-up-form">
-                                    <FormikAlert name="loginSuccess" severity="success"  />
-                                    <FormikAlert name="loginError" severity="error"  />
-                                    <FormikInput 
-                                        name="fullName"
-                                        placeholder="Type name here..."
-                                        id="fullName"
-                                        fullWidth
-                                        variant='outlined'
-                                        className={classes.inputs}
-                                    />
-                                    <FormikInput 
-                                        name="email"
-                                        type="email"
-                                        placeholder="Type email here..." 
-                                        fullWidth
-                                        variant='outlined'
-                                        className={classes.inputs}
-                                    />
-                                    <FormikInput 
-                                        name="password"
-                                        type="password"
-                                        placeholder="Type password here..." 
-                                        fullWidth
-                                        variant='outlined'
-                                        className={classes.inputs}
-                                    />
-                                    <FormikInput 
-                                        name="confirmPassword"
-                                        type="password"
-                                        placeholder="Confirm password here..." 
-                                        fullWidth
-                                        variant='outlined'
-                                        className={classes.inputs}
-                                    />
-                                    <Link href="/login" >Already have an account? Login</Link>
-                                    <Box display="flex" justifyContent="center" my={3}>
-                                        <Button disabled={loading} type="submit" variant="contained" color="primary">
-                                            Sign Up
-                                        </Button>
-                                    </Box>
-                                </Form>
-                            </Card>
-                        </Formik>
-                    </Box>
+        <Box>
+            <AppBar color='primary' position="static">
+                <Box display="flex" flexDirection="row" justifyContent="center">
+                    <Typography color='secondary' variant="h4">ravenous</Typography>
                 </Box>
-            </>
+            </AppBar>
+                <Box height="40rem" display="flex" justifyContent="center" alignItems="center">
+                    <Box maxWidth={300}>
+                        <Formik 
+                            validateOnBlur={false} 
+                            validateOnChange={false} 
+                            initialValues={initialValues}
+                            onSubmit={handleSubmit}
+                            validationSchema={validationSchema}
+                        >
+                        <Card elevation={5} className={classes.card}>
+                            <Box width='100%' display='flex' justifyContent='center' marginTop='1rem'>
+                                <Typography variant="h4" gutterBottom>Sign Up</Typography>
+                            </Box>
+                            <Box display='flex' justifyContent='center'>
+                                <Box width='20rem'>
+                                    <Form id="sign-up-form">
+                                        {error && <Alert severity="error">{error}</Alert>}
+                                        <FormikAlert name="loginSuccess" severity="success"  />
+                                        <FormikAlert name="loginError" severity="error"  />
+                                        <FormikInput 
+                                            name="fullName"
+                                            placeholder="Type name here..."
+                                            id="fullName"
+                                            variant='outlined'
+                                            className={classes.inputs}
+                                        />
+                                        <FormikInput 
+                                            name="email"
+                                            type="email"
+                                            placeholder="Type email here..." 
+                                            variant='outlined'
+                                            className={classes.inputs}
+                                        />
+                                        <FormikInput 
+                                            name="password"
+                                            type="password"
+                                            placeholder="Type password here..." 
+                                            fullWidth
+                                            variant='outlined'
+                                            className={classes.inputs}
+                                        />
+                                        <FormikInput 
+                                            name="confirmPassword"
+                                            type="password"
+                                            placeholder="Confirm password here..." 
+                                            fullWidth
+                                            variant='outlined'
+                                            className={classes.inputs}
+                                        />
+                                        <Box display='flex' justifyContent='center'>
+                                            <Link color='textPrimary' href="/login" >Already have an account? Login</Link>
+                                        </Box>
+                                        <Box display="flex" justifyContent="center" my={3}>
+                                            <Button disabled={loading} type="submit" variant="contained" color="primary">
+                                                <Typography className={classes.button}>Sign Up</Typography>
+                                            </Button>
+                                        </Box>
+                                    </Form>
+                                </Box>
+                            </Box>
+                        </Card>
+                    </Formik>
+                </Box>
+            </Box>
+        </Box>
     );
 };
 

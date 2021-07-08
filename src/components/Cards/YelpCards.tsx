@@ -1,32 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import BusinessCard from './BusinessCard'
 import { useAuth } from '../../contexts/AuthContext';
+import Skeleton from 'react-loading-skeleton';
+import { Business } from '../types';
+
+const useStyles = makeStyles({
+    loadingCards: {
+        marginLeft: '1rem',
+        marginRight: '1rem',
+        marginTop: '1rem',
+        marginBottom: '1rem'    
+    }
+});
 
 const YelpCards = ({ loading }: { loading: boolean }, ) => {
-    const { businesses, profile } = useAuth();
-    const [businessData, setBusinessData] = useState<any>();
-    const [favorites, setFavorites] = useState([]);
+    const classes = useStyles();
+    const { businesses, profile, favorites } = useAuth();
+    const [businessData, setBusinessData] = useState<Business[]>();
 
     useEffect(() => {
         if(businesses) {
             setBusinessData(businesses.data.businesses)
         }
-        if(profile) {
-            setFavorites(profile.favorites)
-        }
     },[businesses, profile]);
 
-
     const renderBusinessCards = () => {
-        if(businessData) {
+        if(businessData && favorites) {
             return businessData.map((business: any, idx: number) => {
                 return (
                     <BusinessCard business={business} loading={loading} key={idx} favorites={favorites}  />
                 )
             })
         } else {
-            return '404 Not Found'
+            return (
+            <Box>
+                <Box display='inline-flex'>
+                    <Skeleton className={classes.loadingCards} height="24.7rem" width='17.5em' count={20}/>
+                </Box>
+            </Box>
+            )
         }
     };
 
@@ -41,4 +54,3 @@ const YelpCards = ({ loading }: { loading: boolean }, ) => {
 
 
 export default YelpCards
-
