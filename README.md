@@ -4,6 +4,15 @@ This project also includes skeleton loaders in the loading states as well as com
 this Project Requires an API from Yelp fusion to run: https://www.yelp.com/fusion.
 as well as firebase.
 
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+
 ![image](https://user-images.githubusercontent.com/61161816/125341205-38f8b900-e308-11eb-9b10-a2200aba31e1.png)
 ![image](https://user-images.githubusercontent.com/61161816/125341276-4d3cb600-e308-11eb-8d68-ac0c57d24984.png)
 ![image](https://user-images.githubusercontent.com/61161816/125341298-53cb2d80-e308-11eb-9a06-1e37658f7ade.png)
