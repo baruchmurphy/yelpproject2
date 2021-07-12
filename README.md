@@ -2,3 +2,10 @@ This yelp project uses react typescript and includes integration of the yelp fus
 The yelp fusion API allows for searching for locations and food genres with the parameters of 'best match', 'highest rating' and 'most reviewed.' 
 This project also includes skeleton loaders in the loading states as well as comprehensive error handling should the pages not be able to load
 ![image](https://user-images.githubusercontent.com/61161816/125341205-38f8b900-e308-11eb-9b10-a2200aba31e1.png)
+![image](https://user-images.githubusercontent.com/61161816/125341276-4d3cb600-e308-11eb-8d68-ac0c57d24984.png)
+![image](https://user-images.githubusercontent.com/61161816/125341298-53cb2d80-e308-11eb-9a06-1e37658f7ade.png)
+![image](https://user-images.githubusercontent.com/61161816/125341344-5f1e5900-e308-11eb-8d90-bf5495f5afab.png)
+![image](https://user-images.githubusercontent.com/61161816/125341406-6b0a1b00-e308-11eb-8a1d-3f27a5a1b1dd.png)
+![image](https://user-images.githubusercontent.com/61161816/125341454-765d4680-e308-11eb-8fce-25abbf277084.png)
+![image](https://user-images.githubusercontent.com/61161816/125341465-7b21fa80-e308-11eb-8ff2-abb578473d36.png)
+![image](https://user-images.githubusercontent.com/61161816/125341483-81b07200-e308-11eb-96d7-444e047684e9.png)
