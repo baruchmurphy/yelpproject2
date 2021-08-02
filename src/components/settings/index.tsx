@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react';
+import { Formik, Form } from 'formik';
 import { useAuth } from '../../contexts/AuthContext';
 import { 
     Box, 
@@ -10,7 +11,6 @@ import {
     Button
 } from '@material-ui/core';
 import { Edit } from '@material-ui/icons';
-import { Formik, Form } from 'formik';
 import FormikInput from '../../formik/FormikInput';
 import FormikAlert from '../../formik/FormikAlert';
 
@@ -64,7 +64,7 @@ const Settings = () => {
                 setEditing(false)
             }
         }, [updateEmailAndPassword, updateFirestoreEmailAndPassword]
-    )
+    );
 
     return (
         <Box width='100%' height='30rem' marginTop='4rem' display='flex' justifyContent='center' alignItems='center' >
@@ -138,6 +138,6 @@ const Settings = () => {
             </Card>
         </Box>
     )
-}
+};
 
-export default Settings
+export default Settings;

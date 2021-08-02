@@ -29,58 +29,58 @@ import NoData from '../components/Errors/NoData';
 
 const useStyles = makeStyles ((theme: any) => 
     createStyles({
-    menuButton: {
-        marginLeft: '.2rem',
-        marginTop: '-.4rem',
-        justifyContent: 'flex-start',
-    },
-    appBarBox: {
-        display: 'inline-flex',
-    },
-    appBar: {
-        height: '3rem',
-        marginBottom: '3rem',
-        display: 'inline-flex'
-    },
-    drawer: {
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        backgroundColor: 'rgb(226, 226, 226)',
-    },
-    drawerItems: {
-        textDecoration: 'none',
-        color:'black'
-    },
-    drawerHeader: {
-        width: 250,
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-    titleText: {
-        color: 'white',
-    },
-    avatarButton: {
-        marginTop: '-.5rem',
-        marginRight: '-.3rem'
-    },
-    link: {
-        color: 'black',
-        textDecoration: 'none' 
-    },
-    divider: {
-        marginBottom: '-7px'
-    },
-    loadingCards: {
-        marginLeft: '1rem', 
-        marginRight: '1rem', 
-        marginTop: '1rem'
-    }
-})
-)
+        menuButton: {
+            marginLeft: '.2rem',
+            marginTop: '-.4rem',
+            justifyContent: 'flex-start',
+        },
+        appBarBox: {
+            display: 'inline-flex',
+        },
+        appBar: {
+            height: '3rem',
+            marginBottom: '3rem',
+            display: 'inline-flex'
+        },
+        drawer: {
+            flexShrink: 0,
+        },
+        drawerPaper: {
+            backgroundColor: 'rgb(226, 226, 226)',
+        },
+        drawerItems: {
+            textDecoration: 'none',
+            color:'black'
+        },
+        drawerHeader: {
+            width: 250,
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+        },
+        titleText: {
+            color: 'white',
+        },
+        avatarButton: {
+            marginTop: '-.5rem',
+            marginRight: '-.3rem'
+        },
+        link: {
+            color: 'black',
+            textDecoration: 'none' 
+        },
+        divider: {
+            marginBottom: '-7px'
+        },
+        loadingCards: {
+            marginLeft: '1rem', 
+            marginRight: '1rem', 
+            marginTop: '1rem'
+        }
+    })
+);
 
 const Home = () => {
     const classes = useStyles();
@@ -94,7 +94,7 @@ const Home = () => {
 
     const toggleLoadingFalse = () => {
         setLoading(false)
-    }
+    };
 
     useEffect(() => {
         if(profile) {
@@ -120,7 +120,7 @@ const Home = () => {
                     setLoading(false)
             }
         }
-    },[history.location.pathname, loading, profile])
+    },[history.location.pathname, loading, profile]);
 
     const drawerItems = [
         {
@@ -237,6 +237,6 @@ const Home = () => {
                 </Box>
             </Box>
     )
-}
+};
 
-export default Home
+export default Home;

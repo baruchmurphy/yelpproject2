@@ -7,6 +7,6 @@ const NotFound = () => {
             <Typography color='primary' variant='h3'>404 not found</Typography>
         </Box>
     )
-}
+};
 
-export default NotFound
+export default NotFound;

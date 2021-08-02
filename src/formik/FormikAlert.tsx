@@ -7,7 +7,7 @@ import Alert from '@material-ui/lab/Alert';
 interface FormikAlertProps {
   name: string;
   severity?: Color;
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,4 +36,4 @@ export default function FormikAlert(props: FormikAlertProps) {
   };
 
   return <Field {...props} name={name} component={AlertComponent} />;
-}
+};

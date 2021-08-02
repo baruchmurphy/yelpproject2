@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Box, makeStyles } from '@material-ui/core';
-import BusinessCard from './BusinessCard'
 import { useAuth } from '../../contexts/AuthContext';
 import Skeleton from 'react-loading-skeleton';
+import { Box, makeStyles } from '@material-ui/core';
+import BusinessCard from './BusinessCard';
 import { Business } from '../types';
 
 const useStyles = makeStyles({
@@ -46,11 +46,11 @@ const YelpCards = ({ loading }: { loading: boolean }, ) => {
 
 
     return (
-            <Box>
-                {renderBusinessCards()}
-            </Box>
+        <Box>
+            {renderBusinessCards()}
+        </Box>
     )
-}
+};
 
 
-export default YelpCards
+export default YelpCards;

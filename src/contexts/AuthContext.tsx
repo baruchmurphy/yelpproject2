@@ -11,7 +11,7 @@ const apiKey = process.env.React_APP_YELP_FUSION_API_KEY
 
 export function useAuth() {
     return useContext(AuthContext);
-}
+};
 
 export function AuthProvider({ children }: any) {
     const history = useHistory();
@@ -71,14 +71,14 @@ export function AuthProvider({ children }: any) {
             } catch (error) {
                 history.push('/error1')
             }
-    } 
+    };
 
     const getProfile = async (id: string) => {
         const retrievedProfile = await firestore.collection('Users').doc(id).get();
         setProfile(retrievedProfile.data())
     
         return retrievedProfile;
-    }
+    };
 
     const resetPassword = (email: string) => {
         return auth.sendPasswordResetEmail(email)
@@ -159,7 +159,7 @@ export function AuthProvider({ children }: any) {
         } catch (error) {
             console.log(error)
         }
-    }
+    };
 
     useEffect(() =>{
         console.log('authuse')
@@ -205,4 +205,4 @@ export function AuthProvider({ children }: any) {
             {children}
         </AuthContext.Provider>
     );
-}
+};

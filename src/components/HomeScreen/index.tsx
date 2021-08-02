@@ -1,11 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Formik, Form } from "formik";
-import FormikInput from '../../formik/FormikInput';
-import * as Yup from 'yup'; 
-import { Box, Button, Typography, makeStyles } from '@material-ui/core';
-import YelpCards from '../Cards/YelpCards';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHistory } from "react-router-dom";
+import { Formik, Form } from "formik";
+import { Box, Button, Typography, makeStyles } from '@material-ui/core';
+import FormikInput from '../../formik/FormikInput';
+import * as Yup from 'yup'; 
+import YelpCards from '../Cards/YelpCards';
 
 const useStyles = makeStyles ({
    sortOptions: {
@@ -18,12 +18,12 @@ const sortByOptions = {
     'best_match': 'Best Match',
     'rating': 'Highest Rating',
     'review_count': 'Most Reviewed'
-}
+};
 
 interface HomeContentProps {
     loading: boolean;
-    toggleLoadingFalse: ()=> void
-}    
+    toggleLoadingFalse: ()=> void;
+};    
 
 
 const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
@@ -42,7 +42,7 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
         } catch (error) {
             history.push('/error1')
         }
-    },[businesses, sortBy, getData, history, toggleLoadingFalse])
+    },[businesses, sortBy, getData, history, toggleLoadingFalse]);
 
     const validationSchema = Yup.object().shape({
         term: Yup.string().required('food type is required'),
@@ -61,7 +61,7 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
                 return getData(values.term, values.location, sortBy)
             }
         },[getData, sortBy]
-    )
+    );
 
     const getSortByClass = (sortByOption: string) => {
         if(sortByOption === sortBy) {
@@ -85,7 +85,7 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
                         {(sortByOptions as any)[sortByOption]}
                     </li>
         })
-    }
+    };
 
     return (
         <>
@@ -142,6 +142,6 @@ const HomeContent = ({loading, toggleLoadingFalse}: HomeContentProps) => {
             <YelpCards loading={loading} />
         </>
     )
-}
+};
 
-export default HomeContent
+export default HomeContent;

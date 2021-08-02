@@ -4,7 +4,7 @@ import { TextField, TextFieldProps } from '@material-ui/core';
 
 interface FormikInputProps {
   name: string;
-}
+};
 
 export default function FormikInput(props: FormikInputProps & TextFieldProps) {
   const [field, meta] = useField({ name: props.name });
@@ -20,4 +20,4 @@ export default function FormikInput(props: FormikInputProps & TextFieldProps) {
       {...props}
     />
   );
-}
+};

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { styled, Box } from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Image from './cover6.jpg';
-import { styled, Box } from "@material-ui/core";
 
 const LoadingScreen = () => {
     const LoadingContainer = styled('div')(() => ({
@@ -13,7 +13,7 @@ const LoadingScreen = () => {
         position: 'fixed',
         top: 0,
         left: 0,
-    }))
+    }));
 
     return(
         <LoadingContainer>
@@ -27,6 +27,6 @@ const LoadingScreen = () => {
             </Box>
         </LoadingContainer>
     )
-}
+};
 
-export default LoadingScreen
+export default LoadingScreen;
