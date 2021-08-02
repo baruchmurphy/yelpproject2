@@ -40,7 +40,7 @@ const Register = () => {
             .max(20, 'Password must be between 6-20 characters')
             .required('Password is required'),
         confirmPassword: Yup.string().required('Password Confirmation is required')
-    })
+    });
     
     const initialValues = {
         fullName: '',

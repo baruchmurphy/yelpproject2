@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Card, makeStyles, Box, Typography, Divider } from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton'
-import { useAuth } from '../../contexts/AuthContext'
+import React, { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { Card, makeStyles, Box, Typography, Divider } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 import { StarBorderOutlined, StarRateTwoTone } from '@material-ui/icons';
 import { Favorite, Business } from '../types'; 
-import Placeholder from './placeholder.png'
+import Placeholder from './placeholder.png';
 
 const useStyles = makeStyles ({
     card: {
@@ -51,7 +51,7 @@ interface BusinessCardProps {
     loading: boolean,
     favorites: Favorite[],
     business: Business,
-}
+};
 
 const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
     const classes = useStyles();
@@ -64,7 +64,7 @@ const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
 
     const reformatText = (text: string) => {
         return text.split(' ')[0].replace(/[^\w\s]/gi, ' ');
-    }
+    };
 
     return(
         <Box marginLeft='2rem' marginBottom='2rem' display='inline-flex' className={classes.card}>
@@ -135,7 +135,7 @@ const BusinessCard = ({ business, loading, favorites }: BusinessCardProps) => {
         </Box>
     )
 
-}
+};
 
 export default BusinessCard;
 

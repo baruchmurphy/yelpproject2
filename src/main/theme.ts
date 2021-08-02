@@ -9,6 +9,6 @@ const Theme = createMuiTheme({
             main:'#FFFFFF'
         }
     }
-})
+});
 
-export default Theme
+export default Theme;

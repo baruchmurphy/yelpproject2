@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Box,  Typography, Card, makeStyles } from '@material-ui/core';
 import Skeleton from 'react-loading-skeleton';
 import { useAuth } from '../../contexts/AuthContext';
@@ -22,7 +22,7 @@ const useStyles = makeStyles ({
 const Favorites = () => {
     const { profile, favorites } = useAuth();
     const classes = useStyles();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if(profile && favorites) {
@@ -30,7 +30,7 @@ const Favorites = () => {
         } else {
             setLoading(false)
         }
-    },[profile, favorites])
+    },[profile, favorites]);
 
     if(favorites && !favorites.length) {
         return( 
@@ -42,7 +42,7 @@ const Favorites = () => {
                 </Box>
             </Box>
         )
-    }
+    };
 
     return (
         loading ?
@@ -63,4 +63,4 @@ const Favorites = () => {
     )
 }
 
-export default Favorites
+export default Favorites;
