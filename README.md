@@ -20,4 +20,5 @@ You will also see any lint errors in the console.
 ![image](https://user-images.githubusercontent.com/61161816/125341406-6b0a1b00-e308-11eb-8a1d-3f27a5a1b1dd.png)
 ![image](https://user-images.githubusercontent.com/61161816/125341483-81b07200-e308-11eb-96d7-444e047684e9.png)
 ![image](https://user-images.githubusercontent.com/61161816/125341454-765d4680-e308-11eb-8fce-25abbf277084.png)
-![image](https://user-images.githubusercontent.com/61161816/125341465-7b21fa80-e308-11eb-8ff2-abb578473d36.png)
+![image](https://user-images.githubusercontent.com/61161816/127932843-5a8939bd-2418-424b-8e06-91354a84ab0b.png)
+
